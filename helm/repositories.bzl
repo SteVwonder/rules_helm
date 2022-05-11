@@ -1,16 +1,16 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 _helm_runtimes = {
-    "2.8.2": [
+    "3.6.3": [
         {
             "os": "linux",
             "arch": "amd64",
-            "sha256": "614b5ac79de4336b37c9b26d528c6f2b94ee6ccacb94b0f4b8d9583a8dd122d3",
+            "sha256": "07c100849925623dc1913209cd1a30f0a9b80a5b4d6ff2153c609d11b043e262",
         },
         {
             "os": "darwin",
             "arch": "amd64",
-            "sha256": "a0a8cf462080b2bc391f38b7cf617618b189cdef9f071c06fa0068c2418cc413",
+            "sha256": "84a1ff17dd03340652d96e8be5172a921c97825fd278a2113c8233a4e8db5236",
         },
     ]
 }
@@ -56,7 +56,7 @@ def helm_tools():
             http_archive(
                 name = "helm_runtime_%s_%s" % (platform["os"], platform["arch"]),
                 build_file_content = """exports_files(["%s-%s/helm"], visibility = ["//visibility:public"])""" % (platform["os"], platform["arch"]),
-                url = "https://storage.googleapis.com/kubernetes-helm/helm-v%s-%s-%s.tar.gz" % (helm_version, platform["os"], platform["arch"]),
+                url = "https://get.helm.sh/helm-v%s-%s-%s.tar.gz" % (helm_version, platform["os"], platform["arch"]),
             )
 
     for helm_s3_version in _helm_s3_runtimes:
